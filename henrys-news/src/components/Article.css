@@ -1,0 +1,15 @@
+.article-div {
+  background-color: rosybrown;
+}
+
+/* .article-div * {
+  background-color: rosybrown;
+} */
+
+.article-link {
+  color: black;
+}
+
+.article-link:hover {
+  color: yellow;
+}

@@ -1,0 +1,14 @@
+#user-avatar {
+  height: 2em;
+  width: 2em;
+}
+
+#user-box {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+}
+
+#user-name {
+  font-size: 1.3em;
+}
