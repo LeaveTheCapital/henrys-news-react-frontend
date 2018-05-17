@@ -18,9 +18,11 @@ export const updateArticleVoteCount = (article_id, vote) => {
   );
 };
 
-export const postComment = (article_id, body) => {
+export const postComment = (article_id, body, belongs_to, user) => {
   return axios.post(
     `https://henrys-news.herokuapp.com/api/articles/${article_id}/comments`,
-    { body }
+    { body, belongs_to, created_by: user  }
   );
 };
+
+// TODO delete comment, post article, votes on comments

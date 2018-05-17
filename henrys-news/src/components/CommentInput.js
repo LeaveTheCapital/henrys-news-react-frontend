@@ -7,6 +7,15 @@ class CommentInput extends React.Component {
     input: ""
   };
 
+
+  componentDidUpdate(prevProps) {
+    if(prevProps.commentCount !== this.props.commentCount) {
+      this.setState({
+        input: ""
+      })
+    }
+  }
+
   render() {
     const { className, onClick, article_id } = this.props;
     const { input } = this.state;
@@ -14,6 +23,7 @@ class CommentInput extends React.Component {
     return (
       <div className={className}>
         <input
+          value={input}
           id="comment-input"
           type="text"
           placeholder="your comment.."

@@ -49,7 +49,7 @@ class App extends Component {
               <Route
                 path="/topics/:topic/:article_id"
                 render={props => {
-                  return <ArticleMain {...props} className="col-sm-10" />;
+                  return <ArticleMain {...props} currentUser={currentUser} className="col-sm-10" />;
                 }}
               />
               <Route

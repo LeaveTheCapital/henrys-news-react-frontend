@@ -27,7 +27,6 @@ class ArticleMain extends React.Component {
     const article_id = this.props.match.params.article_id;
     api.getArticleById(article_id).then(({ data }) => {
       const article = data.article;
-
       this.setState({
         article
       });
@@ -43,7 +42,7 @@ class ArticleMain extends React.Component {
 
   render() {
     const { comments, article } = this.state;
-    // console.log(article)
+    const commentCount = comments.length;
     const { className } = this.props;
     return (
       <div className={className}>
@@ -63,6 +62,7 @@ class ArticleMain extends React.Component {
           </Link>
         </p>
         <CommentInput
+          commentCount={commentCount}
           className="comment-input"
           onClick={this.handleCommentClick}
           article_id={article._id}
@@ -82,9 +82,16 @@ class ArticleMain extends React.Component {
       </div>
     );
   }
-  updateComments = (body, cb) => {
-    const newComments = [...this.state.comments];
 
+  updateComments = (body, cb) => {
+    const {currentUser} = this.props;
+    const {article} = this.state;
+    const newComments = [...this.state.comments];
+    const newComment = {
+      body, belongs_to: article.belongs_to._id, created_by: {...currentUser}
+    }
+    console.log(newComment)
+    newComments.push(newComment)
     this.setState(
       {
         comments: newComments
@@ -94,9 +101,15 @@ class ArticleMain extends React.Component {
   };
 
   handleCommentClick = (article_id, body) => {
+    const {currentUser} = this.props;
+    const user = {avatar_url: currentUser.avatar_url, name: currentUser.name, username: currentUser.username, _id: currentUser._id};
+    console.log(user)
+    const belongs_to = this.state.article.belongs_to._id;
     this.updateComments(body, () => {
-      api.postComment(article_id, body);
-    });
+      api.postComment(article_id, body, belongs_to, user)
+      .then(console.log)
+      .catch(console.log)
+    })
   };
 }
 
