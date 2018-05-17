@@ -1,0 +1,14 @@
+.article-main {
+  background: repeating-linear-gradient(
+    135deg,
+    #fff,
+    #fff 10px,
+    rosybrown 10px,
+    rosybrown 20px
+  );
+}
+
+.article-title {
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 3px;
+}

@@ -5,7 +5,7 @@ const Topics = ({ topics, className }) => {
   return (
     <div className={className}>
       {topics.map(topic => {
-        return <Topic topic={topic} />;
+        return <Topic key={topic._id} topic={topic} />;
       })}
     </div>
   );

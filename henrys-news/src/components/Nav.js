@@ -9,7 +9,9 @@ const Nav = ({ topics }) => {
       <NavLink to="/topics">Topics</NavLink>
 
       {topics.map(topic => (
-        <NavLink to={`/topics/${topic.slug}`}>{topic.title}</NavLink>
+        <NavLink key={topic._id} to={`/topics/${topic.slug}`}>
+          {topic.title}
+        </NavLink>
       ))}
       <NavLink to="/users">Users</NavLink>
     </nav>

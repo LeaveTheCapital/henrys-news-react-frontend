@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import { Route, Switch } from "react-router-dom";
+import axios from "axios";
 import "./App.css";
 import Nav from "./components/Nav";
 import UserBox from "./components/UserBox";
 import Filter from "./components/Filter";
 import Side from "./components/Side";
-import Home from "./components/Home";
 import constants from "./constants";
 import Header from "./components/Header";
 import Topics from "./components/Topics";
@@ -15,11 +15,21 @@ import ArticleMain from "./components/ArticleMain";
 
 class App extends Component {
   state = {
-    articles: constants.articles,
     topics: constants.topics,
     users: constants.users,
     currentUser: constants.users[0]
   };
+
+  componentDidMount() {
+    axios
+      .get("https://henrys-news.herokuapp.com/api/topics")
+      .then(({ data }) => {
+        const topics = data.topics;
+        this.setState({
+          topics
+        });
+      });
+  }
 
   render() {
     const { topics, articles, users, currentUser } = this.state;
@@ -39,13 +49,7 @@ class App extends Component {
               <Route
                 path="/topics/:topic/:article_id"
                 render={props => {
-                  return (
-                    <ArticleMain
-                      {...props}
-                      articles={articles}
-                      className="col-sm-10"
-                    />
-                  );
+                  return <ArticleMain {...props} className="col-sm-10" />;
                 }}
               />
               <Route
@@ -81,7 +85,7 @@ class App extends Component {
                 path="/"
                 render={props => {
                   return (
-                    <Home
+                    <ArticlesByTopic
                       {...props}
                       articles={articles}
                       className="col-sm-10"
@@ -96,6 +100,8 @@ class App extends Component {
       </div>
     );
   }
+
+  vote = () => {};
 }
 
 export default App;
