@@ -19,7 +19,14 @@ class ArticlesByTopic extends React.Component {
     });
   }
 
-  componentDidUpdate() {}
+  componentDidUpdate(prevProps) {
+    console.log(this.props.filter)
+    if(prevProps.filter !== this.props.filter) {
+      this.setState({
+        ...this.state
+      })
+    }
+  }
 
   render() {
     const { articles } = this.state;
@@ -28,10 +35,17 @@ class ArticlesByTopic extends React.Component {
       className,
       match,
       changeVotes,
+      filter,
       handleVoteDownClick,
       handleVoteUpClick
     } = this.props;
     const topic = match.params.topic || "all";
+    if(filter==='top'){
+      articles.sort((a,b)=>b.votes - a.votes)
+    } else if(filter==='popular') {
+      console.log('hello')
+      articles.sort((a,b)=>b.comment_count - a.comment_count)
+    }
     let articlesByTopic;
     topic === "all"
       ? (articlesByTopic = articles)

@@ -1,0 +1,13 @@
+#user-box > span {
+    cursor: pointer
+}
+
+#user-box > span:hover {
+    background: repeating-linear-gradient(
+    135deg,
+    #fff,
+    #fff 10px,
+    yellow 10px,
+    yellow 20px
+  );
+}

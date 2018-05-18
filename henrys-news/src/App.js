@@ -21,11 +21,11 @@ class App extends Component {
     currentUser: constants.users[0],
     votesCast: {},
     articles: [],
-    votesCount: 0
+    votesCount: 0,
+    filter: ''
   };
 
   componentDidMount() {
-    console.log(this.state.currentUser);
     axios
       .get("https://henrys-news.herokuapp.com/api/topics")
       .then(({ data }) => {
@@ -40,6 +40,7 @@ class App extends Component {
     const {
       topics,
       articles,
+      filter,
       users,
       currentUser,
       votesCast,
@@ -51,7 +52,7 @@ class App extends Component {
           <div id="top-bar-row" className="row">
             <Header />
             <Nav topics={topics} />
-            <Filter />
+            <Filter filterByTop={this.filterByTop} filterByPopular={this.filterByPopular}/>
             <UserBox currentUser={currentUser} />
           </div>
         </div>
@@ -72,23 +73,24 @@ class App extends Component {
                       handleVoteUpClick={this.handleVoteUpClick}
                       currentUser={currentUser}
                       className="col-sm-10"
-                    />
-                  );
-                }}
-              />
+                      />
+                    );
+                  }}
+                  />
               <Route
                 path="/topics/:topic"
                 render={props => {
                   return (
                     <ArticlesByTopic
-                      {...props}
-                      topics={topics}
-                      currentUserId={currentUser._id}
-                      articles={articles}
-                      changeVotes={this.changeVotes}
-                      handleVoteDownClick={this.handleVoteDownClick}
-                      handleVoteUpClick={this.handleVoteUpClick}
-                      className="col-sm-10"
+                    {...props}
+                    filter={filter}
+                    topics={topics}
+                    currentUserId={currentUser._id}
+                    articles={articles}
+                    changeVotes={this.changeVotes}
+                    handleVoteDownClick={this.handleVoteDownClick}
+                    handleVoteUpClick={this.handleVoteUpClick}
+                    className="col-sm-10"
                     />
                   );
                 }}
@@ -116,6 +118,7 @@ class App extends Component {
                   return (
                     <ArticlesByTopic
                       {...props}
+                      filter={filter}                      
                       articles={articles}
                       changeVotes={this.changeVotes}
                       handleVoteDownClick={this.handleVoteDownClick}
@@ -203,6 +206,18 @@ class App extends Component {
       }
     });
   };
+
+  filterByTop = () => {
+    this.setState({
+      filter: 'top'
+    })
+  }
+
+  filterByPopular = () => {
+    this.setState({
+      filter: 'popular'
+    })
+  }
 }
 
 export default App;

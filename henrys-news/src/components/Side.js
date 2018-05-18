@@ -1,4 +1,5 @@
 import React from "react";
+import './Side.css';
 
 const Side = props => (
   <section id="side" className="col-sm">

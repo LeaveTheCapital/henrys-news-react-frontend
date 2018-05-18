@@ -1,0 +1,9 @@
+#side {
+    background: repeating-linear-gradient(
+        135deg,
+        #fff,
+        #fff 40px,
+        yellow 40px,
+        yellow 80px
+      );
+}

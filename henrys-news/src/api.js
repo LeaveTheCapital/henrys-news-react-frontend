@@ -50,5 +50,4 @@ export const postArticle = (topic_id, title, input, user_id) => {
 
 // votes on comments
 // sort articles / comments
-// refactor api calls where not exported
-// componentDidUpdate condition for this.props.voteCount
+// refactor api calls where not exported (topics)

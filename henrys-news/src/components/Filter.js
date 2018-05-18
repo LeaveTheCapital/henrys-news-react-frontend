@@ -1,9 +1,10 @@
 import React from "react";
+import './Filter.css';
 
-const Filter = props => (
+const Filter = ({filterByTop, filterByPopular}) => (
   <section id="user-box" className="col-sm">
-    <span>Top&nbsp;</span>
-    <span>Popular&nbsp;</span>
+    <span onClick={filterByTop}>Top&nbsp;</span>
+    <span onClick={filterByPopular}>Popular&nbsp;</span>
     <span>New</span>
   </section>
 );
