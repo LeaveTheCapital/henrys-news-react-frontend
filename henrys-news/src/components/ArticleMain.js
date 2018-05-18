@@ -19,39 +19,47 @@ class ArticleMain extends React.Component {
     },
     comments: [],
     users: [],
-    votesCast: {}
+    votesCast: {},
+    myCommentId: ""
   };
 
   componentDidMount() {
     const article_id = this.props.match.params.article_id;
-    api.getArticleById(article_id).then(({ data }) => {
-      const article = data.article;
-      this.setState({
-        article
-      });
-    });
-    api.getCommentsByArticleId(article_id).then(({ data }) => {
-      const comments = data.comments;
-      this.setState({
-        comments
-      });
-    });
+    Promise.all([
+      api.getArticleById(article_id),
+      api.getCommentsByArticleId(article_id)
+    ])
+      .then(([articleData, commentsData]) => {
+        console.log(articleData, commentsData);
+        const article = articleData.data.article;
+        const comments = commentsData.data.comments;
+        this.setState({ article, comments });
+      })
+      .catch(console.log);
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps, prevState) {
     const article_id = this.props.match.params.article_id;
-    // if (this.props.votesCount !== prevProps.votesCount) {
-    api.getArticleById(article_id).then(({ data }) => {
-      const article = data.article;
-      this.setState({
-        article
-      });
-    });
-    api.getCommentsByArticleId(article_id).then(({ data }) => {
-      const comments = data.comments;
-      this.setState({ comments });
-    });
-    // }
+    const { myCommentId } = this.state;
+    console.log(this.props.votesCount, prevProps.votesCount);
+    if (
+      this.state.votesCast[myCommentId] !== prevState.votesCast[myCommentId] ||
+      this.props.votesCount !== prevProps.votesCount
+    ) {
+      // if (this.props.votesCount !== prevProps.votesCount) {
+      Promise.all([
+        api.getArticleById(article_id),
+        api.getCommentsByArticleId(article_id)
+      ])
+        .then(([articleData, commentsData]) => {
+          console.log(articleData, commentsData);
+          const article = articleData.data.article;
+          const comments = commentsData.data.comments;
+          this.setState({ article, comments });
+        })
+        .catch(console.log);
+      // }
+    }
   }
 
   render() {
@@ -126,7 +134,8 @@ class ArticleMain extends React.Component {
       .then(({ data }) => {
         console.log(data);
         this.setState({
-          votesCast: newVotesCast
+          votesCast: newVotesCast,
+          myCommentId: comment_id
         });
       })
       .catch(console.log);

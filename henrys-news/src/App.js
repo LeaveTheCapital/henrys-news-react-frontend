@@ -149,8 +149,6 @@ class App extends Component {
     }
 
     const newArticles = [...articles];
-    let newVotesCount = this.state.votesCount;
-    newVotesCount++;
 
     newArticles.forEach(article => {
       if (article._id === article_id) {
@@ -164,8 +162,7 @@ class App extends Component {
     this.setState(
       {
         articles: newArticles,
-        votesCast: newVotesCast,
-        votesCount: newVotesCount
+        votesCast: newVotesCast
       },
       cb
     );
@@ -175,7 +172,16 @@ class App extends Component {
     const { votesCast } = this.state;
     this.changeVotes("up", article_id, articles, () => {
       if (votesCast[article_id] !== 1) {
-        api.updateArticleVoteCount(article_id, "up").catch(console.log);
+        api
+          .updateArticleVoteCount(article_id, "up")
+          .then(data => {
+            let newVotesCount = this.state.votesCount;
+            newVotesCount++;
+            this.setState({
+              votesCount: newVotesCount
+            });
+          })
+          .catch(console.log);
       }
     });
   };
@@ -184,7 +190,16 @@ class App extends Component {
     const { votesCast } = this.state;
     this.changeVotes("down", article_id, articles, () => {
       if (votesCast[article_id] !== -1) {
-        api.updateArticleVoteCount(article_id, "down").catch(console.log);
+        api
+          .updateArticleVoteCount(article_id, "down")
+          .then(data => {
+            let newVotesCount = this.state.votesCount;
+            newVotesCount++;
+            this.setState({
+              votesCount: newVotesCount
+            });
+          })
+          .catch(console.log);
       }
     });
   };

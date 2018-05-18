@@ -41,13 +41,14 @@ class ArticlesByTopic extends React.Component {
     return (
       <div className={className}>
         <div className="container articles-container">
-          <PostArticle
-            articleCount={articleCount}
-            className="row"
-            onClick={this.handlePostArticleClick}
-            topic_slug={topic}
-          />
-
+          {topic !== "all" && (
+            <PostArticle
+              articleCount={articleCount}
+              className="row"
+              onClick={this.handlePostArticleClick}
+              topic_slug={topic}
+            />
+          )}
           {articlesByTopic.map(article => {
             return (
               <Article

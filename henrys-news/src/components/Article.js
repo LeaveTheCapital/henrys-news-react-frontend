@@ -15,7 +15,7 @@ const Article = ({
     <div className="container">
       <div className="article-row row">
         <Vote
-          articles={articles}
+          collection={articles}
           handleVoteUpClick={handleVoteUpClick}
           handleVoteDownClick={handleVoteDownClick}
           _id={article._id}
