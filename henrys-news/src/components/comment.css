@@ -2,3 +2,10 @@
   background-color: blanchedalmond;
   border-radius: 1px;
 }
+
+.comment-row {
+  margin-top: 1em;
+  border: 0.03em solid black;
+  border-radius: 3px;
+  padding: 0.1em;
+}

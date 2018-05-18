@@ -1,10 +1,11 @@
 import React from "react";
 import "./Article.css";
 import { Link } from "react-router-dom";
-import Button from "./Button";
+import Vote from "./Vote";
 
 const Article = ({
   article,
+  articles,
   match,
   changeVotes,
   handleVoteUpClick,
@@ -13,19 +14,14 @@ const Article = ({
   <div className="article-div row">
     <div className="container">
       <div className="article-row row">
-        <div className="col-sm-1 vote-box">
-          <Button
-            text="☝"
-            className="vote-button"
-            onClick={() => handleVoteUpClick(article._id)}
-          />
-          <div className="article-votes">{article.votes}</div>
-          <Button
-            text="☟"
-            className="vote-button"
-            onClick={() => handleVoteDownClick(article._id)}
-          />
-        </div>
+        <Vote
+          articles={articles}
+          handleVoteUpClick={handleVoteUpClick}
+          handleVoteDownClick={handleVoteDownClick}
+          _id={article._id}
+          votes={article.votes}
+        />
+
         <div className="col-sm-11">
           <h2>
             <Link

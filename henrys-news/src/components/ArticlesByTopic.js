@@ -1,30 +1,36 @@
 import React from "react";
 import Article from "./Article";
+import PostArticle from "./PostArticle";
 import "./ArticlesByTopic.css";
-import axios from "axios";
 import constants from "../constants";
 import * as api from "../api";
 
 class ArticlesByTopic extends React.Component {
   state = {
-    articles: constants.articles,
-    votesCast: {}
+    articles: constants.articles
   };
 
   componentDidMount() {
-    axios
-      .get("https://henrys-news.herokuapp.com/api/articles")
-      .then(({ data }) => {
-        const articles = data.articles;
-        this.setState({
-          articles
-        });
+    api.getAllArticles().then(({ data }) => {
+      const articles = data.articles;
+      this.setState({
+        articles
       });
+    });
   }
+
+  componentDidUpdate() {}
 
   render() {
     const { articles } = this.state;
-    const { className, match } = this.props;
+    const articleCount = articles.length;
+    const {
+      className,
+      match,
+      changeVotes,
+      handleVoteDownClick,
+      handleVoteUpClick
+    } = this.props;
     const topic = match.params.topic || "all";
     let articlesByTopic;
     topic === "all"
@@ -35,14 +41,22 @@ class ArticlesByTopic extends React.Component {
     return (
       <div className={className}>
         <div className="container articles-container">
+          <PostArticle
+            articleCount={articleCount}
+            className="row"
+            onClick={this.handlePostArticleClick}
+            topic_slug={topic}
+          />
+
           {articlesByTopic.map(article => {
             return (
               <Article
                 key={article._id}
                 article={article}
-                changeVotes={this.changeVotes}
-                handleVoteUpClick={this.handleVoteUpClick}
-                handleVoteDownClick={this.handleVoteDownClick}
+                articles={articles}
+                changeVotes={changeVotes}
+                handleVoteUpClick={handleVoteUpClick}
+                handleVoteDownClick={handleVoteDownClick}
               />
             );
           })}
@@ -51,56 +65,23 @@ class ArticlesByTopic extends React.Component {
     );
   }
 
-  changeVotes = (vote, article_id, cb) => {
-    const { votesCast } = this.state;
-    const newVotesCast = { ...votesCast };
-    if (!newVotesCast[article_id]) {
-      vote === "up"
-        ? (newVotesCast[article_id] = 1)
-        : (newVotesCast[article_id] = -1);
-    } else {
-      if (vote === "up") {
-        newVotesCast[article_id] !== 1 ? newVotesCast[article_id]++ : null;
-      } else if (vote === "down") {
-        newVotesCast[article_id] !== -1 ? newVotesCast[article_id]-- : null;
-      }
-    }
-
-    const newArticles = [...this.state.articles];
-    newArticles.forEach(article => {
-      if (article._id === article_id) {
-        vote === "up" && votesCast[article_id] !== 1
-          ? article.votes++
-          : vote === "down" && votesCast[article_id] !== -1
-            ? article.votes--
-            : null;
-      }
-    });
-    this.setState(
-      {
-        articles: newArticles,
-        votesCast: newVotesCast
-      },
-      cb
-    );
-  };
-
-  handleVoteUpClick = article_id => {
-    const { votesCast } = this.state;
-    this.changeVotes("up", article_id, () => {
-      if (votesCast[article_id] !== 1) {
-        api.updateArticleVoteCount(article_id, "up").catch(console.log);
-      }
-    });
-  };
-
-  handleVoteDownClick = article_id => {
-    const { votesCast } = this.state;
-    this.changeVotes("down", article_id, () => {
-      if (votesCast[article_id] !== -1) {
-        api.updateArticleVoteCount(article_id, "down").catch(console.log);
-      }
-    });
+  handlePostArticleClick = (topic_slug, titleInput, input) => {
+    const user_id = this.props.currentUserId;
+    const topic_id = this.props.topics.find(topic => topic.slug === topic_slug)
+      ._id;
+    api
+      .postArticle(topic_id, titleInput, input, user_id)
+      .then(({ data }) => {
+        // this.forceUpdate(() => {
+        api.getAllArticles().then(({ data }) => {
+          const articles = data.articles;
+          this.setState({
+            articles
+          });
+        });
+        // });
+      })
+      .catch(console.log);
   };
 }
 
