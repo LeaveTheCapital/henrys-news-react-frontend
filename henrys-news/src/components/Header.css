@@ -1,8 +1,9 @@
 #header {
+  border-bottom: 1px solid black;
   font-style: italic;
   color: black;
-  animation: slidein 3s ease-in 1s both running;
-  /* background: radial-gradient(circle at 30%, rosybrown, white 20%) */
+  animation: slidein 2s ease-in 1s both running;
+  /* background: radial-gradient(circle at 30%, #E94B3C, white 20%) */
 }
 
 .header-link {

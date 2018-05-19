@@ -12,7 +12,7 @@ const Article = ({
   handleVoteDownClick
 }) => (
   <div className="article-div row">
-    <div className="container">
+    <div className="container-fluid">
       <div className="article-row row">
         <Vote
           collection={articles}

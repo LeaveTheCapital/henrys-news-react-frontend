@@ -48,6 +48,12 @@ export const postArticle = (topic_id, title, input, user_id) => {
   );
 };
 
+export const getUserProfileInfo = username => {
+  return axios.get(
+    `https://henrys-news.herokuapp.com/api/users/${username}`
+  )
+}
+
 // votes on comments
 // sort articles / comments
 // refactor api calls where not exported (topics)

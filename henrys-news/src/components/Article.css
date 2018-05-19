@@ -1,10 +1,13 @@
 .article-div {
-  background-color: rosybrown;
+  background-color: #FFF;
   margin-top: 1em;
+  border: 1px solid #6F9FD8;
+  box-shadow: 0.2em 0.4em #E94B3C;
+
 }
 
 /* .article-div * {
-  background-color: rosybrown;
+  background-color: #E94B3C;
 } */
 
 .article-link {
@@ -13,6 +16,7 @@
 
 .article-link:hover {
   color: yellow;
+  background: #E94B3C
 }
 
 .vote-box {
@@ -30,9 +34,10 @@
 .vote-button {
   border: none;
   font-size: 1.8em;
-  background-color: rgba(188, 143, 143, 0.5);
+  /* background-color: rgba(188, 143, 143, 0.5); */
 }
 
 .vote-button:hover {
-  color: white;
+  /* height: 2em; */
+  color: blue;
 }

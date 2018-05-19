@@ -2,10 +2,10 @@ import React from "react";
 import "./ArticleMain.css";
 import { Link } from "react-router-dom";
 import Comment from "./Comment";
+import Button from './Button';
 import CommentInput from "./CommentInput";
 import Vote from "./Vote";
 import * as api from "../api";
-// import * as _ from "lodash";
 
 class ArticleMain extends React.Component {
   state = {
@@ -20,7 +20,8 @@ class ArticleMain extends React.Component {
     comments: [],
     users: [],
     votesCast: {},
-    myCommentId: ""
+    myCommentId: "",
+    sort: ""
   };
 
   componentDidMount() {
@@ -46,7 +47,6 @@ class ArticleMain extends React.Component {
       this.state.votesCast[myCommentId] !== prevState.votesCast[myCommentId] ||
       this.props.votesCount !== prevProps.votesCount
     ) {
-      // if (this.props.votesCount !== prevProps.votesCount) {
       Promise.all([
         api.getArticleById(article_id),
         api.getCommentsByArticleId(article_id)
@@ -58,7 +58,6 @@ class ArticleMain extends React.Component {
           this.setState({ article, comments });
         })
         .catch(console.log);
-      // }
     }
   }
 
@@ -94,7 +93,8 @@ class ArticleMain extends React.Component {
         <p>
           <span>{article.created_by.name} | </span>
           <span> Votes: {article.votes}</span>
-          <span> Comments: {comments.length}</span>
+          <span> Comments: {comments.length}
+          </span>
           <Link to={`/topics/${article.belongs_to.slug}`}>
             {" "}
             /topics/{article.belongs_to.slug}
@@ -108,14 +108,17 @@ class ArticleMain extends React.Component {
         />
         <section className="container-fluid" id="comments">
           <div className="row" id="comments-top">
+            <span>
             Comments
+            Sort by: <Button text="Newest" onClick={this.sortCommentsByNewest} />
+          <Button text="Most Popular" onClick={this.sortCommentsByMostPopular} />
+          </span>
           </div>
           {comments.map(comment => {
             return (
               <Comment
                 currentUserId={currentUser._id}
                 comment={comment}
-                // className="comment"
                 key={comment._id}
                 handleDeleteClick={this.handleDeleteClick}
                 handleCommentVoteDownClick={this.handleCommentVoteDownClick}
@@ -166,6 +169,22 @@ class ArticleMain extends React.Component {
       this.changeCommentVotes("down", comment_id, newVotesCast);
     }
   };
+
+  sortCommentsByNewest = () => {
+    const newComments = this.state.comments.slice();
+    newComments.sort((a,b)=> b.created_at - a.created_at);
+    this.setState({
+      comments: newComments
+    })
+  }
+
+  sortCommentsByMostPopular = () => {
+    const newComments = this.state.comments.slice();
+    newComments.sort((a,b)=> b.votes - a.votes);
+    this.setState({
+      comments: newComments
+    })
+  }
 
   handleDeleteClick = id => {
     const { comments } = this.state;

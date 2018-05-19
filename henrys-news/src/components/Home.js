@@ -6,7 +6,7 @@ class Home extends Component {
     const { articles, className } = this.props;
     return (
       <div className={className}>
-        <div className="container">
+        <div className="container-fluid">
           {articles.map(article => (
             <Article key={article._id} article={article} />
           ))}

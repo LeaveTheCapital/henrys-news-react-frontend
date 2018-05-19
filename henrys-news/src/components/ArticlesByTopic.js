@@ -54,7 +54,7 @@ class ArticlesByTopic extends React.Component {
         ));
     return (
       <div className={className}>
-        <div className="container articles-container">
+        <div className="container-fluid articles-container">
           {topic !== "all" && (
             <PostArticle
               articleCount={articleCount}

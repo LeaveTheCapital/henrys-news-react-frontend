@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 import "./Header.css";
 
 const Header = () => (
-  <div id="header" className="col-sm" style={{background: `radial-gradient(circle at 30%, rosybrown, white 20%)`}}>
+  <div id="header" className="col-sm" style={{background: `radial-gradient(ellipse at ${Date.now() % 100}%, #E94B3C, white 60%)`}}>
   <Link to='/' className="header-link">
     Henry's News
   </Link>

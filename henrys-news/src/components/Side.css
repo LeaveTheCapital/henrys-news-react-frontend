@@ -11,6 +11,7 @@
     
     #side-bar-container {
         /* height: 80% */
+        width: 16vw;
 }
 
 .side-topic {
@@ -19,21 +20,21 @@
 }
 
 .side-topic:hover {
-    background: red;
+    background: #E94B3C;
     font-style: italic;
-    color: rosybrown;
+    color: white;
     font-size: 2.2em;
 }
 
 .side-active-topic {
-    color: red;
+    color: #E94B3C;
     background: greenyellow;
     font-size: 2.2em;
     text-decoration: none;
 }
 
 .side-active-topic:hover {
-    color: red;
+    color: #E94B3C;
     background: greenyellow;
     font-size: 2.2em;
     text-decoration: none;

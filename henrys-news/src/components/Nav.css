@@ -5,9 +5,9 @@
   padding-bottom: 0em;
 }
 
-#nav > *:hover {
+/* #nav > *:hover {
   background-color: yellow;
-}
+} */
 
 #nav {
   display: flex;
@@ -20,16 +20,21 @@
   border: 0px solid black;
 }
 
+.topic-name:hover {
+  background-color: yellow;
+}
+
 #nav > NavLink {
-  color: red;
+  color: #E94B3C;
 }
 
 .active-topic-name {
-  color: red;
+  color: #E94B3C;
   background: greenyellow;
+  height: 2em;
 }
 
 .active-topic-name:hover {
-  color: red;
-  background: green;
+  color: #E94B3C;
+  background: greenyellow;
 }
