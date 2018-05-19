@@ -6,4 +6,35 @@
         yellow 40px,
         yellow 80px
       );
+      
+    }
+    
+    #side-bar-container {
+        /* height: 80% */
+}
+
+.side-topic {
+    font-size: 2em;
+    text-decoration: underline;
+}
+
+.side-topic:hover {
+    background: red;
+    font-style: italic;
+    color: rosybrown;
+    font-size: 2.2em;
+}
+
+.side-active-topic {
+    color: red;
+    background: greenyellow;
+    font-size: 2.2em;
+    text-decoration: none;
+}
+
+.side-active-topic:hover {
+    color: red;
+    background: greenyellow;
+    font-size: 2.2em;
+    text-decoration: none;
 }

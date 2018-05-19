@@ -183,6 +183,34 @@ const constants = {
   ],
   users: [
     {
+      username: "tickle122",
+      name: "Tom Tickle",
+      avatar_url:
+        "http://www.spiritsurfers.net/monastery/wp-content/uploads/_41500270_mrtickle.jpg"
+    },
+    {
+      username: "grumpy19",
+      name: "Paul Grump",
+      avatar_url: "http://www.tumbit.com/profile-image/4/original/mr-grumpy.jpg"
+    },
+    {
+      username: "happyamy2016",
+      name: "Amy Happy",
+      avatar_url:
+        "http://vignette1.wikia.nocookie.net/mrmen/images/7/7f/Mr_Happy.jpg/revision/latest?cb=20140102171729"
+    },
+    {
+      username: "cooljmessy",
+      name: "Peter Messy",
+      avatar_url: "http://i.imgur.com/WfX0Neu.jpg"
+    },
+    {
+      username: "weegembump",
+      name: "Gemma Bump",
+      avatar_url:
+        "http://www.upandrunning.co.uk/media/catalog/product/cache/1/image/650x/040ec09b1e35df139433887a97daa66f/m/r/mr-bump.jpg"
+    },
+    {
       _id: "5ae31116924f164de44c3131",
       username: "jessjelly",
       name: "Jess Jelly",

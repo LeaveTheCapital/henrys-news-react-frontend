@@ -18,7 +18,7 @@ class App extends Component {
   state = {
     topics: constants.topics,
     users: constants.users,
-    currentUser: constants.users[0],
+    currentUser: constants.users[5],
     votesCast: {},
     articles: [],
     votesCount: 0,
@@ -129,7 +129,7 @@ class App extends Component {
                 }}
               />
             </Switch>
-            <Side />
+            <Side filter={filter} topics={topics} users={users} articles={articles}/>
           </div>
         </div>
       </div>

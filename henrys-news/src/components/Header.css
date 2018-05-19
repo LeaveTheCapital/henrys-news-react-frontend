@@ -1,3 +1,17 @@
 #header {
   font-style: italic;
+  color: black;
+  animation: slidein 3s ease-in 1s both running;
+  /* background: radial-gradient(circle at 30%, rosybrown, white 20%) */
+}
+
+.header-link {
+  /* z-index: 100; */
+  text-decoration: none;
+  color: black;
+}
+
+@keyframes slidein {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
 }
