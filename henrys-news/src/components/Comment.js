@@ -28,10 +28,10 @@ const Comment = ({
       />
       <div className="col-sm-11">
         <p>
-          <Link to={`/users/${userId}`}>{username}</Link>
-          &nbsp;
-          {comment.votes} &nbsp; {voteStr}
-          &nbsp; posted: &nbsp; {timestamp}
+          <span>{username}</span>
+          &nbsp;&nbsp;
+          {comment.votes}&nbsp;{voteStr}
+          &nbsp;&nbsp;  posted:&nbsp;{timestamp}
         </p>
         <p>
           {comment.body}
