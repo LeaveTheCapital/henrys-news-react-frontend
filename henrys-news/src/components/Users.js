@@ -8,8 +8,6 @@ class Users extends React.Component {
   }
 
   componentDidMount() {
-    // sorry about this guys.. I could have done this in any of several easier ways
-    // but decided to embrace the challenge! I will refactor it soon 8-)
     const {users} = this.props;
     api.getAllArticles()
   .then(({data})=> {
@@ -27,7 +25,6 @@ class Users extends React.Component {
     })
     Promise.all(userPromises)
     .then(newUsersData=>{
-      console.log(newUsersData)
       newUsers.forEach((newUser, i)=> {
         newUser.number_of_articles = userActivity[newUsersData[i].data.user._id];
       })

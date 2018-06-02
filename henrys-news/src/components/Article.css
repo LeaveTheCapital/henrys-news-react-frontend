@@ -6,9 +6,6 @@
 
 }
 
-/* .article-div * {
-  background-color: #E94B3C;
-} */
 
 .article-link {
   color: black;
@@ -34,10 +31,8 @@
 .vote-button {
   border: none;
   font-size: 1.8em;
-  /* background-color: rgba(188, 143, 143, 0.5); */
 }
 
 .vote-button:hover {
-  /* height: 2em; */
   color: blue;
 }

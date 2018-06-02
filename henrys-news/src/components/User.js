@@ -1,7 +1,6 @@
 import React from "react";
 
 const User = ({ user, index }) => {
-  console.log(index)
   return <div>
   <div>{user.name}&nbsp;
   {index === 0 && <span style={{border: '1px solid black'}}>Our most active scribe!</span>}

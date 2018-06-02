@@ -31,7 +31,6 @@ class ArticleMain extends React.Component {
       api.getCommentsByArticleId(article_id)
     ])
       .then(([articleData, commentsData]) => {
-        console.log(articleData, commentsData);
         const article = articleData.data.article;
         const comments = commentsData.data.comments;
         this.setState({ article, comments });
@@ -42,7 +41,6 @@ class ArticleMain extends React.Component {
   componentDidUpdate(prevProps, prevState) {
     const article_id = this.props.match.params.article_id;
     const { myCommentId } = this.state;
-    console.log(this.props.votesCount, prevProps.votesCount);
     if (
       this.state.votesCast[myCommentId] !== prevState.votesCast[myCommentId] ||
       this.props.votesCount !== prevProps.votesCount
@@ -52,7 +50,6 @@ class ArticleMain extends React.Component {
         api.getCommentsByArticleId(article_id)
       ])
         .then(([articleData, commentsData]) => {
-          console.log(articleData, commentsData);
           const article = articleData.data.article;
           const comments = commentsData.data.comments;
           this.setState({ article, comments });
@@ -135,7 +132,6 @@ class ArticleMain extends React.Component {
     api
       .updateCommentVoteCount(comment_id, vote)
       .then(({ data }) => {
-        console.log(data);
         this.setState({
           votesCast: newVotesCast,
           myCommentId: comment_id
@@ -222,7 +218,6 @@ class ArticleMain extends React.Component {
       created_by: currentUser,
       created_at: new Date().getTime()
     };
-    console.log(newComment);
     newComments.push(newComment);
     this.setState(
       {

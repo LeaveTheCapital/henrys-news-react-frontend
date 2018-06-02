@@ -20,7 +20,6 @@ class ArticlesByTopic extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    console.log(this.props.filter)
     if(prevProps.filter !== this.props.filter) {
       this.setState({
         ...this.state
@@ -43,7 +42,6 @@ class ArticlesByTopic extends React.Component {
     if(filter==='top'){
       articles.sort((a,b)=>b.votes - a.votes)
     } else if(filter==='popular') {
-      console.log('hello')
       articles.sort((a,b)=>b.comment_count - a.comment_count)
     }
     let articlesByTopic;
