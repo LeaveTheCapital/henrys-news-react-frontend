@@ -144,10 +144,8 @@ class ArticleMain extends React.Component {
     const { votesCast } = this.state;
     const newVotesCast = { ...votesCast };
     if (!newVotesCast[comment_id]) {
-      {
-        newVotesCast[comment_id] = 1;
-        this.changeCommentVotes("up", comment_id, newVotesCast);
-      }
+      newVotesCast[comment_id] = 1;
+      this.changeCommentVotes("up", comment_id, newVotesCast);
     } else if (newVotesCast[comment_id] !== 1) {
       newVotesCast[comment_id]++;
       this.changeCommentVotes("up", comment_id, newVotesCast);

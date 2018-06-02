@@ -145,9 +145,9 @@ class App extends Component {
         : (newVotesCast[article_id] = -1);
     } else {
       if (vote === "up") {
-        newVotesCast[article_id] !== 1 ? newVotesCast[article_id]++ : null;
+        newVotesCast[article_id] !== 1 ? newVotesCast[article_id]++ : newVotesCast[article_id] = newVotesCast[article_id];
       } else if (vote === "down") {
-        newVotesCast[article_id] !== -1 ? newVotesCast[article_id]-- : null;
+        newVotesCast[article_id] !== -1 ? newVotesCast[article_id]-- : newVotesCast[article_id] = newVotesCast[article_id];
       }
     }
 
@@ -159,7 +159,7 @@ class App extends Component {
           ? article.votes++
           : vote === "down" && votesCast[article_id] !== -1
             ? article.votes--
-            : null;
+            : article.votes = article.votes;
       }
     });
     this.setState(

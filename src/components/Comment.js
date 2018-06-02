@@ -1,6 +1,5 @@
 import React from "react";
 import moment from "moment";
-import { Link } from "react-router-dom";
 import Button from "./Button";
 import "./comment.css";
 import Vote from "./Vote";
@@ -14,7 +13,6 @@ const Comment = ({
   handleCommentVoteDownClick
 }) => {
   const voteStr = comment.votes === 1 ? "vote" : "votes";
-  const userId = comment.belongs_to;
   const username = comment.created_by.username;
   const timestamp = moment(comment.created_at).fromNow();
   return (

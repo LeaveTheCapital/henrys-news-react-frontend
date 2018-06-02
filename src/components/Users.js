@@ -38,7 +38,7 @@ class Users extends React.Component {
 
   render () {
     const {sortedUsers} = this.state;
-    const {users, className} = this.props;
+    const {className} = this.props;
   return (
     <div className={className}>
       {sortedUsers.map((user, i) => {

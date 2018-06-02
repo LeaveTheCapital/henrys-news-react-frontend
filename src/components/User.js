@@ -7,7 +7,7 @@ const User = ({ user, index }) => {
   <span style={{fontStyle: 'italic'}}>&nbsp;{user.number_of_articles} Articles</span>
   </div>
   <div>{user.username}</div>
-  <img src={user.avatar_url}/>
+  <img src={user.avatar_url} alt="user avatar" />
   
   </div>;
 };
